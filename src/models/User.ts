@@ -1,6 +1,5 @@
 import {
   AllowNull,
-  Default,
   Column,
   Model,
   Table,
