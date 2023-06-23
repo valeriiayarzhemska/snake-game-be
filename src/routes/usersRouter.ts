@@ -9,6 +9,8 @@ router.get('/', userController.getUsers);
 
 router.get('/top', userController.getTopUsers);
 
+router.get('/:id', userController.getOne);
+
 router.post('/', userController.addUser);
 
 router.patch('/:id', userController.update);
