@@ -34,7 +34,7 @@ export class UsersService {
     return createdUser;
   }
 
-  updateUser = (userId: string, userValues: UserScore | UserName) => {
+  updateUser = (userId: string, userValues: Partial<User>) => {
     return User.update({ userValues }, {
       where: { id: userId },
     });

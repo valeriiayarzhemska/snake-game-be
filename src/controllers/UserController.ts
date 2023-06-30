@@ -68,7 +68,7 @@ export class UserController {
   }
 
   update = async(
-    req: Request<{ id: string }, User, UserScore, UserName>,
+    req: Request<{ id: string }, User, Partial<User>>,
     res: Response<User | string>
   ) => {
     const { id } = req.params;
