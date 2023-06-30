@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { UsersService } from '../services/userService'
 import { User } from '../models/User';
-import { UserScore, UserValues } from '../types/User';
+import { UserName, UserScore, UserValues } from '../types/User';
 
 
 export class UserController {
@@ -68,13 +68,13 @@ export class UserController {
   }
 
   update = async(
-    req: Request<{ id: string }, User, UserScore>,
+    req: Request<{ id: string }, User, UserScore, UserName>,
     res: Response<User | string>
   ) => {
     const { id } = req.params;
-    const { score } = req.body;
+    const userValues = req.body;
   
-    if (score === null || score === undefined || !id) {
+    if (!userValues || !id) {
       res.sendStatus(400);
   
       return;
@@ -88,7 +88,7 @@ export class UserController {
       return;
     }
   
-    await this.userService.updateUser(id, score);
+    await this.userService.updateUser(id, userValues);
   
     const updatedUser = await this.userService.getUserById(id);
 

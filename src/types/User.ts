@@ -6,3 +6,7 @@ export interface UserValues {
 export interface UserScore {
   score: number;
 }
+
+export interface UserName {
+  name: string;
+}

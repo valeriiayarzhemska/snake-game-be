@@ -1,5 +1,5 @@
 import { User } from '../models/User';
-import { UserValues } from '../types/User';
+import { UserName, UserScore, UserValues } from '../types/User';
 
 export class UsersService {
   getAllUsers = async () => {
@@ -34,8 +34,8 @@ export class UsersService {
     return createdUser;
   }
 
-  updateUser = (userId: string, score: number) => {
-    return User.update({ score }, {
+  updateUser = (userId: string, userValues: UserScore | UserName) => {
+    return User.update({ userValues }, {
       where: { id: userId },
     });
   };
