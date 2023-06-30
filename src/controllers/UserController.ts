@@ -73,8 +73,9 @@ export class UserController {
   ) => {
     const { id } = req.params;
     const { score, name } = req.body;
+    console.log(req.body);
   
-    if ((!score && !name )|| !id) {
+    if ((!score && !name ) || !id) {
       res.sendStatus(400);
   
       return;
