@@ -72,9 +72,9 @@ export class UserController {
     res: Response<User | string>
   ) => {
     const { id } = req.params;
-    const userValues = req.body;
+    const { score, name } = req.body;
   
-    if (!userValues || !id) {
+    if ((!score && !name )|| !id) {
       res.sendStatus(400);
   
       return;
@@ -88,8 +88,14 @@ export class UserController {
       return;
     }
   
-    await this.userService.updateUser(id, userValues);
-  
+    if (score) {
+      await this.userService.updateUser(id, { score });
+    }
+
+    if (name) {
+      await this.userService.updateUser(id, { name });
+    }
+
     const updatedUser = await this.userService.getUserById(id);
 
     if (!updatedUser) {
