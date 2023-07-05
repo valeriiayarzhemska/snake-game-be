@@ -67,17 +67,16 @@ export class UserController {
     return res.send(user);
   }
 
-  update = async(
+  update = async (
     req: Request<{ id: string }, User, Partial<User>>,
     res: Response<User | string>
   ) => {
     const { id } = req.params;
     const { score, name } = req.body;
-    console.log(req.body);
   
-    if ((!score && !name ) || !id) {
+    if ((!score && !name) || !id) {
       res.sendStatus(400);
-  
+
       return;
     }
   
@@ -85,26 +84,31 @@ export class UserController {
   
     if (!foundUser) {
       res.sendStatus(404);
-  
+
       return;
     }
   
+    const updatedFields: Partial<User> = {};
+  
     if (score) {
-      await this.userService.updateUser(id, { score });
+      updatedFields.score = score;
     }
-
+  
     if (name) {
-      await this.userService.updateUser(id, { name });
+      updatedFields.name = name;
     }
-
+  
+    await this.userService.updateUser(id, updatedFields);
+  
     const updatedUser = await this.userService.getUserById(id);
-
+  
     if (!updatedUser) {
       res.sendStatus(404);
-  
+
       return;
     }
   
     return res.send(updatedUser);
-  }
+  };
+  
 }
